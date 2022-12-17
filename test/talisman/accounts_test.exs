@@ -21,7 +21,13 @@ defmodule Talisman.AccountsTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      valid_attrs = %{bio: "some bio", email: "some email", hashed_password: "some hashed_password", image: "some image", username: "some username"}
+      valid_attrs = %{
+        bio: "some bio",
+        email: "some email",
+        hashed_password: "some hashed_password",
+        image: "some image",
+        username: "some username"
+      }
 
       assert {:ok, %User{} = user} = Accounts.create_user(valid_attrs)
       assert user.bio == "some bio"
@@ -37,7 +43,14 @@ defmodule Talisman.AccountsTest do
 
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
-      update_attrs = %{bio: "some updated bio", email: "some updated email", hashed_password: "some updated hashed_password", image: "some updated image", username: "some updated username"}
+
+      update_attrs = %{
+        bio: "some updated bio",
+        email: "some updated email",
+        hashed_password: "some updated hashed_password",
+        image: "some updated image",
+        username: "some updated username"
+      }
 
       assert {:ok, %User{} = user} = Accounts.update_user(user, update_attrs)
       assert user.bio == "some updated bio"
