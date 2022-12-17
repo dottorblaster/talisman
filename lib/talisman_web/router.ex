@@ -20,10 +20,11 @@ defmodule TalismanWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", TalismanWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", TalismanWeb do
+    pipe_through :api
+
+    post "/users", UserController, :create
+  end
 
   # Enables LiveDashboard only for development
   #
