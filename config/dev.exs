@@ -80,4 +80,3 @@ config :talisman, Talisman.EventStore,
   password: "postgres",
   database: "talisman_eventstore_dev",
   hostname: "localhost"
-
