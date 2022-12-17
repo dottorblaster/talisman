@@ -1,4 +1,7 @@
 defmodule Talisman.Accounts.User do
+  @moduledoc """
+  User context
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
