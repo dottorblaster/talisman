@@ -28,3 +28,10 @@ config :logger, level: :warn
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :talisman, Talisman.EventStore,
+  serializer: EventStore.JsonSerializer,
+  username: "postgres",
+  password: "postgres",
+  database: "talisman_eventstore_test",
+  hostname: "localhost"
