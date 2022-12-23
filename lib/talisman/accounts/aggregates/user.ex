@@ -39,7 +39,7 @@ defmodule Talisman.Accounts.Aggregates.User do
   @doc """
   Modify the state after a user registration
   """
-  def apply(%User{} = user, %UserRegistered{
+  def apply(%User{uuid: nil} = user, %UserRegistered{
         user_uuid: user_uuid,
         username: username,
         email: email,

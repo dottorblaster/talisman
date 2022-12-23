@@ -7,6 +7,8 @@ defmodule Talisman.Accounts do
   alias Talisman.Repo
 
   alias Talisman.Accounts.User
+  alias Talisman.Accounts.Commands.RegisterUser
+  alias Talisman.Router
 
   @doc """
   Returns the list of users.
@@ -100,5 +102,15 @@ defmodule Talisman.Accounts do
   """
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
+  end
+
+  @doc """
+  Register a new user.
+  """
+  def register_user(attrs \\ %{}) do
+    attrs
+    |> Map.put(:user_uuid, UUID.uuid4())
+    |> RegisterUser.new!()
+    |> Router.dispatch()
   end
 end

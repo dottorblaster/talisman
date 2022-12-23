@@ -11,5 +11,8 @@ defmodule Talisman.Repo.Migrations.CreateAccountsUsers do
 
       timestamps()
     end
+
+    create unique_index(:accounts_users, [:username])
+    create unique_index(:accounts_users, [:email])
   end
 end
