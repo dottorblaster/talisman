@@ -3,6 +3,7 @@ defmodule Talisman.Repo.Migrations.CreateAccountsUsers do
 
   def change do
     create table(:accounts_users) do
+      add :uuid, :uuid, primary_key: true
       add :username, :string
       add :email, :string
       add :hashed_password, :string

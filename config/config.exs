@@ -59,13 +59,7 @@ config :talisman, Talisman.Commanded,
     event_store: Talisman.EventStore
   ],
   pubsub: :local,
-  registry: :local,
-  snapshotting: %{
-    Talisman.Accounts.Aggregates.User => [
-      snapshot_every: 200,
-      snapshot_version: 1
-    ],
-  }
+  registry: :local
 
 config :commanded_ecto_projections, repo: Talisman.Repo
 

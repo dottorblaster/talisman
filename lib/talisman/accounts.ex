@@ -8,7 +8,7 @@ defmodule Talisman.Accounts do
 
   alias Talisman.Accounts.User
   alias Talisman.Accounts.Commands.RegisterUser
-  alias Talisman.Router
+  alias Talisman.Commanded
 
   @doc """
   Returns the list of users.
@@ -111,6 +111,6 @@ defmodule Talisman.Accounts do
     attrs
     |> Map.put(:user_uuid, UUID.uuid4())
     |> RegisterUser.new!()
-    |> Router.dispatch()
+    |> Commanded.dispatch()
   end
 end
