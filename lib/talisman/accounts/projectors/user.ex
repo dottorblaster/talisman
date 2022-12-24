@@ -1,4 +1,8 @@
 defmodule Talisman.Accounts.Projectors.User do
+  @moduledoc """
+  User projector
+  """
+
   use Commanded.Projections.Ecto,
     name: "Accounts.Projectors.User",
     application: Talisman.Commanded,

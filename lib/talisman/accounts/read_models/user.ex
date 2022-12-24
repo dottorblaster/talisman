@@ -1,4 +1,8 @@
 defmodule Talisman.Accounts.ReadModels.User do
+  @moduledoc """
+  User read model.
+  """
+
   use Ecto.Schema
 
   @primary_key {:uuid, :binary_id, autogenerate: false}

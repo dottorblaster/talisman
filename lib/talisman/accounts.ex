@@ -6,8 +6,8 @@ defmodule Talisman.Accounts do
   import Ecto.Query, warn: false
   alias Talisman.Repo
 
-  alias Talisman.Accounts.User
   alias Talisman.Accounts.Commands.RegisterUser
+  alias Talisman.Accounts.User
   alias Talisman.Commanded
 
   @doc """
