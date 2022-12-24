@@ -83,5 +83,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-${{ hashFiles('mix.lock') }}
       - name: Install dependencies
         run: mix deps.get
+      - name: Reset the database
+        run: mix do ecto.reset, event_store.drop, event_store.create, event_store.init
       - name: Run tests
         run: mix test
