@@ -2,8 +2,11 @@ defmodule Talisman.Accounts.ReadModels.User do
   @moduledoc """
   User read model.
   """
-
   use Ecto.Schema
+
+  import Ecto.Query
+
+  alias Talisman.Accounts.ReadModels.User
 
   @primary_key {:uuid, :binary_id, autogenerate: false}
 
@@ -15,5 +18,10 @@ defmodule Talisman.Accounts.ReadModels.User do
     field :image, :string
 
     timestamps()
+  end
+
+  def by_username(username) do
+    from u in User,
+      where: u.username == ^username
   end
 end
