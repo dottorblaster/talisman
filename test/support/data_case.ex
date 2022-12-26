@@ -26,6 +26,7 @@ defmodule Talisman.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Talisman.DataCase
+      import Talisman.Factory
     end
   end
 

@@ -15,9 +15,11 @@ defmodule Talisman.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Talisman.PubSub},
       # Start the Endpoint (http/https)
-      TalismanWeb.Endpoint
+      TalismanWeb.Endpoint,
+      Talisman.Commanded,
       # Start a worker by calling: Talisman.Worker.start_link(arg)
       # {Talisman.Worker, arg}
+      Talisman.Accounts.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

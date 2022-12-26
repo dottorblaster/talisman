@@ -53,6 +53,16 @@ config :talisman, Talisman.EventStore, serializer: Commanded.Serialization.JsonS
 
 config :talisman, event_stores: [Talisman.EventStore]
 
+config :talisman, Talisman.Commanded,
+  event_store: [
+    adapter: Commanded.EventStore.Adapters.EventStore,
+    event_store: Talisman.EventStore
+  ],
+  pubsub: :local,
+  registry: :local
+
+config :commanded_ecto_projections, repo: Talisman.Repo
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
