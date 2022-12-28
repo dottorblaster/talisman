@@ -1,4 +1,4 @@
-defmodule Talisman.Cookbooks.Events.RecipeAdded do
+defmodule Talisman.Cookbooks.Events.CookbookCreated do
   @moduledoc """
   RecipeAdded event
   """
@@ -11,8 +11,5 @@ defmodule Talisman.Cookbooks.Events.RecipeAdded do
     field :author_uuid, Ecto.UUID
     field :cookbook_uuid, Ecto.UUID
     field :name, :string
-    field :recipe, :string
-    field :ingredients, {:array, :string}
-    field :category, :string
   end
 end

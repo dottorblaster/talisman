@@ -9,5 +9,6 @@ defmodule Talisman.Cookbooks.Events.RecipeDeleted do
 
   defevent do
     field :recipe_uuid, Ecto.UUID
+    field :cookbook_uuid, Ecto.UUID
   end
 end
