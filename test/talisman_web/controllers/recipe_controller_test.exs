@@ -31,7 +31,19 @@ defmodule TalismanWeb.RecipeControllerTest do
     slug: "some updated slug",
     title: "some updated title"
   }
-  @invalid_attrs %{author_bio: nil, author_image: nil, author_username: nil, author_uuid: nil, body: nil, description: nil, favorite_count: nil, ingredients: nil, published_at: nil, slug: nil, title: nil}
+  @invalid_attrs %{
+    author_bio: nil,
+    author_image: nil,
+    author_username: nil,
+    author_uuid: nil,
+    body: nil,
+    description: nil,
+    favorite_count: nil,
+    ingredients: nil,
+    published_at: nil,
+    slug: nil,
+    title: nil
+  }
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}

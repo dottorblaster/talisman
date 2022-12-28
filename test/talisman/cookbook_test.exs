@@ -8,7 +8,19 @@ defmodule Talisman.CookbookTest do
 
     import Talisman.CookbookFixtures
 
-    @invalid_attrs %{author_bio: nil, author_image: nil, author_username: nil, author_uuid: nil, body: nil, description: nil, favorite_count: nil, ingredients: nil, published_at: nil, slug: nil, title: nil}
+    @invalid_attrs %{
+      author_bio: nil,
+      author_image: nil,
+      author_username: nil,
+      author_uuid: nil,
+      body: nil,
+      description: nil,
+      favorite_count: nil,
+      ingredients: nil,
+      published_at: nil,
+      slug: nil,
+      title: nil
+    }
 
     test "list_recipes/0 returns all recipes" do
       recipe = recipe_fixture()
@@ -21,7 +33,19 @@ defmodule Talisman.CookbookTest do
     end
 
     test "create_recipe/1 with valid data creates a recipe" do
-      valid_attrs = %{author_bio: "some author_bio", author_image: "some author_image", author_username: "some author_username", author_uuid: "some author_uuid", body: "some body", description: "some description", favorite_count: 42, ingredients: [], published_at: ~N[2022-12-25 11:51:00], slug: "some slug", title: "some title"}
+      valid_attrs = %{
+        author_bio: "some author_bio",
+        author_image: "some author_image",
+        author_username: "some author_username",
+        author_uuid: "some author_uuid",
+        body: "some body",
+        description: "some description",
+        favorite_count: 42,
+        ingredients: [],
+        published_at: ~N[2022-12-25 11:51:00],
+        slug: "some slug",
+        title: "some title"
+      }
 
       assert {:ok, %Recipe{} = recipe} = Cookbook.create_recipe(valid_attrs)
       assert recipe.author_bio == "some author_bio"
@@ -43,7 +67,20 @@ defmodule Talisman.CookbookTest do
 
     test "update_recipe/2 with valid data updates the recipe" do
       recipe = recipe_fixture()
-      update_attrs = %{author_bio: "some updated author_bio", author_image: "some updated author_image", author_username: "some updated author_username", author_uuid: "some updated author_uuid", body: "some updated body", description: "some updated description", favorite_count: 43, ingredients: [], published_at: ~N[2022-12-26 11:51:00], slug: "some updated slug", title: "some updated title"}
+
+      update_attrs = %{
+        author_bio: "some updated author_bio",
+        author_image: "some updated author_image",
+        author_username: "some updated author_username",
+        author_uuid: "some updated author_uuid",
+        body: "some updated body",
+        description: "some updated description",
+        favorite_count: 43,
+        ingredients: [],
+        published_at: ~N[2022-12-26 11:51:00],
+        slug: "some updated slug",
+        title: "some updated title"
+      }
 
       assert {:ok, %Recipe{} = recipe} = Cookbook.update_recipe(recipe, update_attrs)
       assert recipe.author_bio == "some updated author_bio"
