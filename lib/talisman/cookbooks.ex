@@ -1,4 +1,4 @@
-defmodule Talisman.Cookbook do
+defmodule Talisman.Cookbooks do
   @moduledoc """
   The Cookbook context.
   """
@@ -6,7 +6,7 @@ defmodule Talisman.Cookbook do
   import Ecto.Query, warn: false
   alias Talisman.Repo
 
-  alias Talisman.Cookbook.Recipe
+  alias Talisman.Cookbooks.Recipe
 
   @doc """
   Returns the list of recipes.

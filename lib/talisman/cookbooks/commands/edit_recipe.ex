@@ -1,16 +1,15 @@
-defmodule Talisman.Cookbooks.Events.RecipeAdded do
+defmodule Talisman.Cookbooks.Commands.EditRecipe do
   @moduledoc """
-  RecipeAdded event
+  EditRecipe command 
   """
 
   @required_fields :all
 
-  use Talisman.Event
+  use Talisman.Command
 
-  defevent do
-    field :author_uuid, Ecto.UUID
-    field :recipe_uuid, Ecto.UUID
+  defcommand do
     field :cookbook_uuid, Ecto.UUID
+    field :recipe_uuid, Ecto.UUID
     field :name, :string
     field :recipe, :string
     field :ingredients, {:array, :string}

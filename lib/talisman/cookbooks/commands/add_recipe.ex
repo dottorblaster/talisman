@@ -9,6 +9,7 @@ defmodule Talisman.Cookbooks.Commands.AddRecipe do
 
   defcommand do
     field :cookbook_uuid, Ecto.UUID
+    field :recipe_uuid, Ecto.UUID
     field :author_uuid, Ecto.UUID
     field :recipe, :string
     field :name, :string

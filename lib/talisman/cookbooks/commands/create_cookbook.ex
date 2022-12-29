@@ -1,6 +1,6 @@
 defmodule Talisman.Cookbooks.Commands.CreateCookbook do
   @moduledoc """
-  RecipeAdded event
+  CreateCookbook command
   """
 
   @required_fields :all
