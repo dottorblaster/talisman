@@ -57,7 +57,8 @@ defmodule Talisman.MixProject do
       {:uuid, "~> 1.1"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:faker, "~> 0.17", only: [:dev, :test]},
-      {:ex_machina, "~> 2.7.0", only: :test}
+      {:ex_machina, "~> 2.7.0", only: :test},
+      {:tailwind, "~> 0.1.9", runtime: Mix.env() == :dev}
     ]
   end
 
