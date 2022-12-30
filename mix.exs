@@ -48,6 +48,7 @@ defmodule Talisman.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
+      {:slugify, "~> 1.3"},
       {:plug_cowboy, "~> 2.5"},
       {:commanded, "~> 1.4"},
       {:eventstore, "~> 1.4"},
@@ -72,7 +73,8 @@ defmodule Talisman.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["esbuild default --minify", "phx.digest"],
+      "db.reset": ["event_store.drop", "event_store.create", "event_store.init", "ecto.reset"]
     ]
   end
 end
