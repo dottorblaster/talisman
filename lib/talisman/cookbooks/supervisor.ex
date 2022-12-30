@@ -16,7 +16,7 @@ defmodule Talisman.Cookbooks.Supervisor do
   def init(_arg) do
     Supervisor.init(
       [
-        Cookbooks.Projectors.Recipe
+        Cookbooks.Projectors.Cookbook
       ],
       strategy: :one_for_one
     )
