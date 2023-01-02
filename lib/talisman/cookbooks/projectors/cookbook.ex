@@ -9,8 +9,8 @@ defmodule Talisman.Cookbooks.Projectors.Cookbook do
     repo: Talisman.Repo,
     consistency: :strong
 
-  alias Talisman.Cookbooks.Events.CookbookCreated
-  alias Talisman.Cookbooks.ReadModels.Cookbook
+  alias Talisman.Cookbooks.Events.{CookbookCreated, RecipeAdded}
+  alias Talisman.Cookbooks.ReadModels.{Cookbook, Recipe}
 
   project(
     %CookbookCreated{
@@ -24,6 +24,30 @@ defmodule Talisman.Cookbooks.Projectors.Cookbook do
         author_uuid: author_uuid,
         name: name,
         recipes: []
+      })
+    end
+  )
+
+  project(
+    %RecipeAdded{
+      recipe_uuid: uuid,
+      author_uuid: author_uuid,
+      cookbook_uuid: cookbook_uuid,
+      name: name,
+      recipe: recipe,
+      ingredients: ingredients,
+      category: category
+    },
+    fn multi ->
+      Ecto.Multi.insert(multi, :recipe, %Recipe{
+        uuid: uuid,
+        author_uuid: author_uuid,
+        cookbook_uuid: cookbook_uuid,
+        name: name,
+        recipe: recipe,
+        ingredients: ingredients,
+        category: category,
+        slug: Slug.slugify(name)
       })
     end
   )
