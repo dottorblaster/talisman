@@ -9,7 +9,7 @@ defmodule Talisman.Cookbooks.Projectors.Cookbook do
     repo: Talisman.Repo,
     consistency: :strong
 
-  alias Talisman.Cookbooks.Events.{CookbookCreated, RecipeAdded}
+  alias Talisman.Cookbooks.Events.{CookbookCreated, RecipeAdded, RecipeLiked}
   alias Talisman.Cookbooks.ReadModels.{Cookbook, Recipe}
 
   project(
@@ -49,6 +49,22 @@ defmodule Talisman.Cookbooks.Projectors.Cookbook do
         category: category,
         slug: Slug.slugify(name)
       })
+    end
+  )
+
+  project(
+    %RecipeLiked{
+      like_author: like_author,
+      recipe_uuid: recipe_uuid
+    },
+    fn multi ->
+      Ecto.Multi.insert(multi, :recipe, %Recipe{uuid: recipe_uuid},
+        conflict_target: :uuid,
+        on_conflict: [
+          inc: [like_count: 1],
+          push: [liked_by: like_author]
+        ]
+      )
     end
   )
 end
