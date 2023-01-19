@@ -33,5 +33,6 @@ config :talisman, Talisman.EventStore,
   serializer: EventStore.JsonSerializer,
   username: "postgres",
   password: "postgres",
-  database: "talisman_eventstore_test",
-  hostname: "localhost"
+  database: "talisman_eventstore_test#{System.get_env("MIX_TEST_PARTITION")}",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox
