@@ -4,11 +4,12 @@ defmodule Talisman.Cookbooks do
   """
 
   import Ecto.Query, warn: false
-  alias Talisman.Repo
   alias Talisman.Commanded
 
   alias Talisman.Cookbooks.Commands.CreateCookbook
   alias Talisman.Cookbooks.ReadModels.Recipe
+
+  alias Talisman.Repo
 
   @doc """
   Returns the list of recipes.
@@ -43,6 +44,6 @@ defmodule Talisman.Cookbooks do
     attrs
     |> Map.put(:cookbook_uuid, UUID.uuid4())
     |> CreateCookbook.new!()
-    |> Commanded.dispatch()
+    |> Commanded.dispatch(consistency: :strong)
   end
 end

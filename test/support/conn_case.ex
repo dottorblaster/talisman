@@ -31,8 +31,7 @@ defmodule TalismanWeb.ConnCase do
     end
   end
 
-  setup tags do
-    Talisman.DataCase.setup_sandbox(tags)
+  setup _ do
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
