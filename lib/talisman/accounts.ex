@@ -61,7 +61,7 @@ defmodule Talisman.Accounts do
         attrs
         |> Map.put(:user_uuid, UUID.uuid4())
         |> RegisterUser.new!()
-        |> Commanded.dispatch()
+        |> Commanded.dispatch(consistency: :strong)
     end
   end
 

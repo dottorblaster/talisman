@@ -16,8 +16,6 @@ defmodule Talisman.DataCase do
 
   use ExUnit.CaseTemplate
 
-  alias Ecto.Adapters.SQL.Sandbox
-
   using do
     quote do
       alias Talisman.Repo
@@ -30,17 +28,16 @@ defmodule Talisman.DataCase do
     end
   end
 
-  setup tags do
-    Talisman.DataCase.setup_sandbox(tags)
-    :ok
-  end
+  setup do
+    {:ok, _} = Application.ensure_all_started(:talisman)
 
-  @doc """
-  Sets up the sandbox based on the test tags.
-  """
-  def setup_sandbox(tags) do
-    pid = Sandbox.start_owner!(Talisman.Repo, shared: not tags[:async])
-    on_exit(fn -> Sandbox.stop_owner(pid) end)
+    on_exit(fn ->
+      :ok = Application.stop(:talisman)
+
+      MyApp.Storage.reset!()
+    end)
+
+    :ok
   end
 
   @doc """

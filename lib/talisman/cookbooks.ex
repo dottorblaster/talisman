@@ -4,9 +4,12 @@ defmodule Talisman.Cookbooks do
   """
 
   import Ecto.Query, warn: false
-  alias Talisman.Repo
+  alias Talisman.Commanded
 
-  alias Talisman.Cookbooks.Recipe
+  alias Talisman.Cookbooks.Commands.{AddRecipe, CreateCookbook, LikeRecipe}
+  alias Talisman.Cookbooks.ReadModels.{Cookbook, Recipe}
+
+  alias Talisman.Repo
 
   @doc """
   Returns the list of recipes.
@@ -37,68 +40,24 @@ defmodule Talisman.Cookbooks do
   """
   def get_recipe!(id), do: Repo.get!(Recipe, id)
 
-  @doc """
-  Creates a recipe.
-
-  ## Examples
-
-      iex> create_recipe(%{field: value})
-      {:ok, %Recipe{}}
-
-      iex> create_recipe(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_recipe(attrs \\ %{}) do
-    %Recipe{}
-    |> Recipe.changeset(attrs)
-    |> Repo.insert()
+  def create_cookbook(attrs \\ %{}) do
+    attrs
+    |> Map.put(:cookbook_uuid, UUID.uuid4())
+    |> CreateCookbook.new!()
+    |> Commanded.dispatch(consistency: :strong)
   end
 
-  @doc """
-  Updates a recipe.
-
-  ## Examples
-
-      iex> update_recipe(recipe, %{field: new_value})
-      {:ok, %Recipe{}}
-
-      iex> update_recipe(recipe, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_recipe(%Recipe{} = recipe, attrs) do
-    recipe
-    |> Recipe.changeset(attrs)
-    |> Repo.update()
+  def add_recipe(attrs \\ %{}) do
+    attrs
+    |> Map.put(:recipe_uuid, UUID.uuid4())
+    |> AddRecipe.new!()
+    |> Commanded.dispatch(consistency: :strong)
   end
 
-  @doc """
-  Deletes a recipe.
+  def get_cookbooks_by_author_uuid(uuid), do: uuid |> Cookbook.by_author_uuid() |> Repo.all()
 
-  ## Examples
+  def get_cookbook(uuid), do: uuid |> Cookbook.by_cookbook_uuid() |> Repo.one()
 
-      iex> delete_recipe(recipe)
-      {:ok, %Recipe{}}
-
-      iex> delete_recipe(recipe)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_recipe(%Recipe{} = recipe) do
-    Repo.delete(recipe)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking recipe changes.
-
-  ## Examples
-
-      iex> change_recipe(recipe)
-      %Ecto.Changeset{data: %Recipe{}}
-
-  """
-  def change_recipe(%Recipe{} = recipe, attrs \\ %{}) do
-    Recipe.changeset(recipe, attrs)
-  end
+  def like_recipe(attrs \\ %{}),
+    do: attrs |> LikeRecipe.new!() |> Commanded.dispatch(consistency: :strong)
 end

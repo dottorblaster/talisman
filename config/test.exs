@@ -10,7 +10,6 @@ config :talisman, Talisman.Repo,
   password: "postgres",
   hostname: "localhost",
   database: "talisman_test#{System.get_env("MIX_TEST_PARTITION")}",
-  pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
 # We don't run a server during test. If one is required,
@@ -33,5 +32,5 @@ config :talisman, Talisman.EventStore,
   serializer: EventStore.JsonSerializer,
   username: "postgres",
   password: "postgres",
-  database: "talisman_eventstore_test",
+  database: "talisman_eventstore_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost"
