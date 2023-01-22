@@ -47,7 +47,8 @@ defmodule Talisman.Cookbooks.Projectors.Cookbook do
         recipe: recipe,
         ingredients: ingredients,
         category: category,
-        slug: Slug.slugify(name)
+        slug: Slug.slugify(name),
+        like_count: 0
       })
     end
   )
