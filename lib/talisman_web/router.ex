@@ -23,7 +23,6 @@ defmodule TalismanWeb.Router do
   scope "/api", TalismanWeb do
     pipe_through :api
 
-    resources "/users", UserController, only: [:create, :show]
   end
 
   # Enables LiveDashboard only for development

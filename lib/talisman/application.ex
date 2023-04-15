@@ -19,7 +19,6 @@ defmodule Talisman.Application do
       Talisman.Commanded,
       # Start a worker by calling: Talisman.Worker.start_link(arg)
       # {Talisman.Worker, arg}
-      Talisman.Accounts.Supervisor,
       Talisman.Cookbooks.Supervisor
     ]
 
