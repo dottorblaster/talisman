@@ -1,4 +1,8 @@
 defmodule Talisman.Accounts.UserToken do
+  @moduledoc """
+  User token schema
+  """
+
   use Ecto.Schema
   import Ecto.Query
   alias Talisman.Accounts.UserToken
@@ -12,6 +16,8 @@ defmodule Talisman.Accounts.UserToken do
   @confirm_validity_in_days 7
   @change_email_validity_in_days 7
   @session_validity_in_days 60
+
+  @foreign_key_type Ecto.UUID
 
   schema "users_tokens" do
     field :token, :binary

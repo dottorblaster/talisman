@@ -6,7 +6,7 @@ defmodule Talisman.Accounts do
   import Ecto.Query, warn: false
   alias Talisman.Repo
 
-  alias Talisman.Accounts.{User, UserToken, UserNotifier}
+  alias Talisman.Accounts.{User, UserNotifier, UserToken}
 
   ## Database getters
 

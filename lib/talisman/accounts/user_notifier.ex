@@ -1,4 +1,8 @@
 defmodule Talisman.Accounts.UserNotifier do
+  @moduledoc """
+  Notifications module. Scaffolded.
+  """
+
   import Swoosh.Email
 
   alias Talisman.Mailer

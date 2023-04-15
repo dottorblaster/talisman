@@ -1,4 +1,8 @@
 defmodule TalismanWeb.UserAuth do
+  @moduledoc """
+  User auth module
+  """
+
   import Plug.Conn
   import Phoenix.Controller
 
