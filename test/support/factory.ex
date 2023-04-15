@@ -4,8 +4,6 @@ defmodule Talisman.Factory do
   """
   use ExMachina
 
-  alias Talisman.Accounts.Commands.RegisterUser
-
   alias Talisman.Cookbooks.Commands.{
     AddRecipe,
     CreateCookbook,
@@ -22,15 +20,6 @@ defmodule Talisman.Factory do
       bio: Faker.Lorem.paragraph(),
       image: Faker.Internet.image_url()
     }
-  end
-
-  def register_user_command_factory do
-    RegisterUser.new!(%{
-      user_uuid: Faker.UUID.v4(),
-      username: Faker.Pokemon.name() |> String.downcase(),
-      email: Faker.Internet.email(),
-      hashed_password: Faker.UUID.v4()
-    })
   end
 
   def add_recipe_command_factory do
