@@ -6,7 +6,7 @@ defmodule Talisman.Repo.Migrations.CreateRecipes do
       add :uuid, :binary_id, primary_key: true
       add :cookbook_uuid, :binary_id
       add :author_uuid, :binary_id
-      add :recipe, :string
+      add :recipe, :text
       add :like_count, :integer
       add :liked_by, {:array, :string}
       add :ingredients, {:array, :string}
