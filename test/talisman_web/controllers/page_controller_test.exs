@@ -1,5 +1,5 @@
 defmodule TalismanWeb.PageControllerTest do
-  use TalismanWeb.ConnCase
+  use TalismanWeb.ConnCase, async: true
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")
