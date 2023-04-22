@@ -39,7 +39,19 @@ defmodule Talisman.Accounts.User do
     user
     |> cast(attrs, [:username, :email, :password])
     |> validate_email()
+    |> validate_username()
     |> validate_password(opts)
+  end
+
+  defp validate_username(changeset) do
+    changeset
+    |> validate_required([:username])
+    |> validate_format(:username, ~r/^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._\-]+(?<![_.])$/,
+      message: "must respect the format"
+    )
+    |> validate_length(:username, max: 50)
+    |> unsafe_validate_unique(:username, Talisman.Repo)
+    |> unique_constraint(:username)
   end
 
   defp validate_email(changeset) do
