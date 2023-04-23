@@ -4,7 +4,14 @@ defmodule Talisman.AccountsFixtures do
   entities via the `Talisman.Accounts` context.
   """
 
-  def unique_user_username, do: Faker.Pokemon.name() |> String.downcase()
+  def unique_user_username,
+    do:
+      Faker.Person.name()
+      |> String.downcase()
+      |> String.replace(" ", "")
+      |> String.replace(".", "")
+      |> String.replace("'", "")
+
   def unique_user_email, do: Faker.Internet.email()
   def valid_user_password, do: "hello world!"
 
