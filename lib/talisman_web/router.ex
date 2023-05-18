@@ -78,6 +78,7 @@ defmodule TalismanWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
+    live "/cookbooks/new", NewCookbookLive
     live "/recipes/new", NewRecipeLive
   end
 
