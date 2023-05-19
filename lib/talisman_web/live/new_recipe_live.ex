@@ -2,12 +2,21 @@ defmodule TalismanWeb.NewRecipeLive do
   use TalismanWeb, :live_view
 
   alias Phoenix.HTML.Form
+  alias Talisman.Cookbooks
   alias TalismanWeb.Components.Ingredient
 
   on_mount TalismanWeb.UserLiveAuth
 
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(name: "") |> assign(ingredients: ["lel"]) |> assign(recipe: "")}
+    user_id = socket.assigns.current_user.id
+    cookbooks = Cookbooks.get_cookbooks_by_author_uuid(user_id)
+
+    {:ok,
+     socket
+     |> assign(cookbooks: cookbooks)
+     |> assign(name: "")
+     |> assign(ingredients: [])
+     |> assign(recipe: "")}
   end
 
   def render(assigns) do
