@@ -41,6 +41,14 @@ defmodule TalismanWeb.NewRecipeLive do
               </div>
 
               <div>
+                <select name="cookbook" id="cookbook" phx-change="update_cookbook_id">
+                  <%= for cookbook <- assigns.cookbooks do %>
+                    <option value={cookbook.uuid}><%= cookbook.name %></option>
+                  <% end %>
+                </select>
+              </div>
+
+              <div>
                 <label for="Description" class="block text-sm text-gray-500 dark:text-gray-300">Write down your recipe!</label>
 
                 <textarea name="recipe" placeholder="lorem..." class="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" phx-change="update_recipe"><%= Form.normalize_value("text", assigns.recipe) %></textarea>
@@ -94,6 +102,12 @@ defmodule TalismanWeb.NewRecipeLive do
 
   def handle_event("update_recipe", %{"recipe" => recipe}, socket) do
     {:noreply, assign(socket, recipe: recipe)}
+  end
+
+  def handle_event("update_cookbook_id", payload, socket) do
+    IO.inspect(payload)
+    IO.inspect(socket)
+    {:noreply, socket}
   end
 
   def handle_event(
