@@ -14,6 +14,7 @@ defmodule TalismanWeb.NewRecipeLive do
     {:ok,
      socket
      |> assign(cookbooks: cookbooks)
+     |> assign(cookbook_id: "")
      |> assign(name: "")
      |> assign(ingredients: [])
      |> assign(recipe: "")}
@@ -127,6 +128,7 @@ defmodule TalismanWeb.NewRecipeLive do
         _,
         %{
           assigns: %{
+            cookbook_id: cookbook_id,
             recipe: recipe,
             ingredients: ingredients,
             name: name,
@@ -134,6 +136,16 @@ defmodule TalismanWeb.NewRecipeLive do
           }
         } = socket
       ) do
+    :ok =
+      Cookbooks.add_recipe(%{
+        cookbook_uuid: cookbook_id,
+        author_uuid: user_id,
+        recipe: recipe,
+        name: name,
+        ingredients: ingredients,
+        category: ""
+      })
+
     {:noreply, socket}
   end
 end
