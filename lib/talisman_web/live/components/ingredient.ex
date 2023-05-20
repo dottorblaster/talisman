@@ -16,11 +16,7 @@ defmodule TalismanWeb.Components.Ingredient do
         name={@id}
         phx-target={@myself}
       />
-      <button
-        type="button"
-        phx-click="delete_ingredient"
-        phx-target={@myself}
-      >
+      <button type="button" phx-click="delete_ingredient" phx-target={@myself}>
         Delete
       </button>
     </span>

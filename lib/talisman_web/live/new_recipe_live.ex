@@ -25,7 +25,6 @@ defmodule TalismanWeb.NewRecipeLive do
       <div class="mx-auto max-w-screen-xl max-h-full px-4 py-16 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
           <div class="rounded-lg bg-white p-8 border-gray200 border shadow-lg lg:col-span-3 lg:p-12">
-
             <form phx-submit="save" class="space-y-4">
               <div>
                 <label class="sr-only" for="name">Name</label>
@@ -49,16 +48,30 @@ defmodule TalismanWeb.NewRecipeLive do
               </div>
 
               <div>
-                <label for="Description" class="block text-sm text-gray-500 dark:text-gray-300">Write down your recipe!</label>
+                <label for="Description" class="block text-sm text-gray-500 dark:text-gray-300">
+                  Write down your recipe!
+                </label>
 
-                <textarea name="recipe" placeholder="lorem..." class="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" phx-change="update_recipe"><%= Form.normalize_value("text", assigns.recipe) %></textarea>
-                  
-                <p class="mt-3 text-xs text-gray-400 dark:text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <textarea
+                  name="recipe"
+                  placeholder="lorem..."
+                  class="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+                  phx-change="update_recipe"
+                ><%= Form.normalize_value("text", assigns.recipe) %></textarea>
+
+                <p class="mt-3 text-xs text-gray-400 dark:text-gray-600">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
               </div>
 
               <div class="mt-4">
                 <%= for {ingredient, index} <- Enum.with_index(assigns.ingredients) do %>
-                  <.live_component module={Ingredient} value={ingredient} index={index} id={"ingredient-#{index}"} />
+                  <.live_component
+                    module={Ingredient}
+                    value={ingredient}
+                    index={index}
+                    id={"ingredient-#{index}"}
+                  />
                 <% end %>
               </div>
 
@@ -75,7 +88,6 @@ defmodule TalismanWeb.NewRecipeLive do
                 </button>
               </div>
             </form>
-
           </div>
         </div>
       </div>
