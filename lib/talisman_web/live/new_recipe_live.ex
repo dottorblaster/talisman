@@ -117,10 +117,8 @@ defmodule TalismanWeb.NewRecipeLive do
     {:noreply, assign(socket, recipe: recipe)}
   end
 
-  def handle_event("update_cookbook_id", payload, socket) do
-    IO.inspect(payload)
-    IO.inspect(socket)
-    {:noreply, socket}
+  def handle_event("update_cookbook_id", %{"cookbook" => cookbook}, socket) do
+    {:noreply, assign(socket, cookbook: cookbook)}
   end
 
   def handle_event(
