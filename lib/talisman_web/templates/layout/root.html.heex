@@ -5,17 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content={csrf_token_value()}>
-    <%= live_title_tag assigns[:page_title] || "Talisman", suffix: " · Phoenix Framework" %>
+    <.live_title suffix="- Talisman">
+      <%= assigns[:page_title] || "Talisman" %>
+    </.live_title>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
   <body>
 
     <header>
-        <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+        <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-orange-400">
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                <a href="https://flowbite.com" class="flex items-center">
-                    <img src="" class="mr-3 h-6 sm:h-9" alt="Talisman Logo" />
+                <a href="/" class="flex items-center">
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Talisman</span>
                 </a>
 
