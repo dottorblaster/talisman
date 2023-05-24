@@ -17,6 +17,8 @@ defmodule TalismanWeb do
   and import those modules here.
   """
 
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: TalismanWeb
@@ -24,6 +26,8 @@ defmodule TalismanWeb do
       import Plug.Conn
       import TalismanWeb.Gettext
       alias TalismanWeb.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
     end
   end
 
@@ -98,6 +102,17 @@ defmodule TalismanWeb do
       import TalismanWeb.ErrorHelpers
       import TalismanWeb.Gettext
       alias TalismanWeb.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: TalismanWeb.Endpoint,
+        router: TalismanWeb.Router,
+        statics: TalismanWeb.static_paths()
     end
   end
 
