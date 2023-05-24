@@ -24,6 +24,8 @@ defmodule TalismanWeb.ConnCase do
       import Phoenix.ConnTest
       import TalismanWeb.ConnCase
 
+      use TalismanWeb, :verified_routes
+
       alias TalismanWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing

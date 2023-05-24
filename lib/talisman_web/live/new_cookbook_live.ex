@@ -23,6 +23,6 @@ defmodule TalismanWeb.NewCookbookLive do
   def handle_event("new_cookbook_submit", _, socket) do
     %{assigns: %{cookbook_name: cookbook_name, current_user: %{id: user_id}}} = socket
     :ok = Cookbooks.create_cookbook(%{author_uuid: user_id, name: cookbook_name})
-    {:noreply, push_navigate(socket, to: "/cookbooks")}
+    {:noreply, push_patch(socket, to: ~p"/cookbooks")}
   end
 end
