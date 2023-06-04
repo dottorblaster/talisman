@@ -3,7 +3,7 @@ defmodule Talisman.Cookbooks.Commands.AddRecipe do
   AddRecipe command
   """
 
-  @required_fields :all
+  @required_fields [:cookbook_uuid, :recipe_uuid, :name, :recipe, :ingredients]
 
   use Talisman.Command
 

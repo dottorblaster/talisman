@@ -3,7 +3,7 @@ defmodule Talisman.Cookbooks.Events.RecipeAdded do
   RecipeAdded event
   """
 
-  @required_fields :all
+  @required_fields [:author_uuid, :recipe_uuid, :cookbook_uuid, :name, :recipe, :ingredients]
 
   use Talisman.Event
 

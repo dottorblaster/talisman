@@ -3,7 +3,17 @@ defmodule Talisman.Cookbooks.Recipe do
   Recipe type to be used mainly to be embedded inside a cookbook
   """
 
-  @required_fields :all
+  @required_fields [
+    :author_uuid,
+    :recipe_uuid,
+    :recipe,
+    :like_count,
+    :liked_by,
+    :ingredients,
+    :published_at,
+    :slug,
+    :name
+  ]
 
   use Talisman.Type
 
