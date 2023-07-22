@@ -5,6 +5,9 @@ defmodule TalismanWeb.NewRecipeLive do
   alias Talisman.Cookbooks
   alias TalismanWeb.Components.Ingredient
 
+  import TalismanWeb.Components.Button
+  import TalismanWeb.Components.Input
+
   on_mount TalismanWeb.UserLiveAuth
 
   def mount(_params, _session, socket) do
@@ -29,11 +32,10 @@ defmodule TalismanWeb.NewRecipeLive do
             <form phx-submit="save" class="space-y-4">
               <div>
                 <label class="sr-only" for="name">Name</label>
-                <input
-                  name="name"
-                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                  placeholder="Name"
+                <.input
                   type="text"
+                  name="name"
+                  placeholder="Name"
                   id="name"
                   phx-change="update_name"
                   value={Form.normalize_value("text", assigns.name)}
@@ -77,16 +79,13 @@ defmodule TalismanWeb.NewRecipeLive do
               </div>
 
               <div class="mt-4">
-                <button phx-click="add_ingredient" type="button">Add ingredient</button>
+                <.button phx-click="add_ingredient" type="button">Add ingredient</.button>
               </div>
 
               <div class="mt-4">
-                <button
-                  type="submit"
-                  class="inline-block w-full rounded-lg bg-orange-400 px-5 py-3 font-medium text-white sm:w-auto"
-                >
+                <.button type="submit">
                   Save recipe
-                </button>
+                </.button>
               </div>
             </form>
           </div>
