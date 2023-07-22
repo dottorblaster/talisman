@@ -3,16 +3,28 @@ defmodule TalismanWeb.NewCookbookLive do
 
   alias Talisman.Cookbooks
 
+  import TalismanWeb.Components.Button
+  import TalismanWeb.Components.Container
+  import TalismanWeb.Components.Input
+
   on_mount TalismanWeb.UserLiveAuth
 
   def mount(_params, _session, socket), do: {:ok, assign(socket, cookbook_name: "")}
 
   def render(assigns) do
     ~H"""
-    <form class="">
-      <input name="cookbook_name" phx-change="update_cookbook_name" value={assigns.cookbook_name} />
-      <button type="button" phx-click="new_cookbook_submit">Submit</button>
-    </form>
+    <.container>
+      <form class="">
+        <.input
+          type="text"
+          name="cookbook_name"
+          phx-change="update_cookbook_name"
+          placeholder="Kekw"
+          value={assigns.cookbook_name}
+        />
+        <.button type="button" phx-click="new_cookbook_submit">Submit</.button>
+      </form>
+    </.container>
     """
   end
 

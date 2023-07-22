@@ -5,10 +5,13 @@ defmodule TalismanWeb.Components.Ingredient do
 
   use Phoenix.LiveComponent
 
+  import TalismanWeb.Components.Button
+  import TalismanWeb.Components.Input
+
   def render(assigns) do
     ~H"""
     <span>
-      <input
+      <.input
         class="mt-2"
         type="text"
         value={@value}
@@ -16,9 +19,9 @@ defmodule TalismanWeb.Components.Ingredient do
         name={@id}
         phx-target={@myself}
       />
-      <button type="button" phx-click="delete_ingredient" phx-target={@myself}>
+      <.button type="button" phx-click="delete_ingredient" phx-target={@myself}>
         Delete
-      </button>
+      </.button>
     </span>
     """
   end
