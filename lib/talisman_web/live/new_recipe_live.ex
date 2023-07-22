@@ -6,6 +6,7 @@ defmodule TalismanWeb.NewRecipeLive do
   alias TalismanWeb.Components.Ingredient
 
   import TalismanWeb.Components.Button
+  import TalismanWeb.Components.Container
   import TalismanWeb.Components.Input
 
   on_mount TalismanWeb.UserLiveAuth
@@ -23,75 +24,78 @@ defmodule TalismanWeb.NewRecipeLive do
      |> assign(recipe: "")}
   end
 
+  def render(%{cookbooks: []} = assigns) do
+    ~H"""
+    <.container>
+      <p class="mb-5">You need to create a cookbook first!</p>
+      <.button phx-click="navigate_create_cookbook">Jump to cookbook creation</.button>
+    </.container>
+    """
+  end
+
   def render(assigns) do
     ~H"""
-    <section class="">
-      <div class="mx-auto max-w-screen-xl max-h-full px-4 py-16 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-          <div class="rounded-lg bg-white p-8 border-gray200 border shadow-lg lg:col-span-3 lg:p-12">
-            <form phx-submit="save" class="space-y-4">
-              <div>
-                <label class="sr-only" for="name">Name</label>
-                <.input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  id="name"
-                  phx-change="update_name"
-                  value={Form.normalize_value("text", assigns.name)}
-                />
-              </div>
-
-              <div>
-                <select name="cookbook" id="cookbook" phx-change="update_cookbook_id">
-                  <%= for cookbook <- assigns.cookbooks do %>
-                    <option value={cookbook.uuid}><%= cookbook.name %></option>
-                  <% end %>
-                </select>
-              </div>
-
-              <div>
-                <label for="Description" class="block text-sm text-gray-500 dark:text-gray-300">
-                  Write down your recipe!
-                </label>
-
-                <textarea
-                  name="recipe"
-                  placeholder="lorem..."
-                  class="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
-                  phx-change="update_recipe"
-                ><%= Form.normalize_value("text", assigns.recipe) %></textarea>
-
-                <p class="mt-3 text-xs text-gray-400 dark:text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-              </div>
-
-              <div class="mt-4">
-                <%= for {ingredient, index} <- Enum.with_index(assigns.ingredients) do %>
-                  <.live_component
-                    module={Ingredient}
-                    value={ingredient}
-                    index={index}
-                    id={"ingredient-#{index}"}
-                  />
-                <% end %>
-              </div>
-
-              <div class="mt-4">
-                <.button phx-click="add_ingredient" type="button">Add ingredient</.button>
-              </div>
-
-              <div class="mt-4">
-                <.button type="submit">
-                  Save recipe
-                </.button>
-              </div>
-            </form>
-          </div>
+    <.container>
+      <form phx-submit="save" class="space-y-4">
+        <div>
+          <label class="sr-only" for="name">Name</label>
+          <.input
+            type="text"
+            name="name"
+            placeholder="Name"
+            id="name"
+            phx-change="update_name"
+            value={Form.normalize_value("text", assigns.name)}
+          />
         </div>
-      </div>
-    </section>
+
+        <div>
+          <select name="cookbook" id="cookbook" phx-change="update_cookbook_id">
+            <%= for cookbook <- assigns.cookbooks do %>
+              <option value={cookbook.uuid}><%= cookbook.name %></option>
+            <% end %>
+          </select>
+        </div>
+
+        <div>
+          <label for="Description" class="block text-sm text-gray-500 dark:text-gray-300">
+            Write down your recipe!
+          </label>
+
+          <textarea
+            name="recipe"
+            placeholder="lorem..."
+            class="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-96 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+            phx-change="update_recipe"
+          ><%= Form.normalize_value("text", assigns.recipe) %></textarea>
+
+          <p class="mt-3 text-xs text-gray-400 dark:text-gray-600">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+        </div>
+
+        <div class="mt-4">
+          <%= for {ingredient, index} <- Enum.with_index(assigns.ingredients) do %>
+            <.live_component
+              module={Ingredient}
+              value={ingredient}
+              index={index}
+              id={"ingredient-#{index}"}
+            />
+          <% end %>
+        </div>
+
+        <div class="mt-4">
+          <.button phx-click="add_ingredient" type="button">Add ingredient</.button>
+        </div>
+
+        <div class="mt-4">
+          <.button type="submit">
+            Save recipe
+          </.button>
+        </div>
+      </form>
+    </.container>
     """
   end
 
@@ -118,6 +122,10 @@ defmodule TalismanWeb.NewRecipeLive do
 
   def handle_event("update_cookbook_id", %{"cookbook" => cookbook}, socket) do
     {:noreply, assign(socket, cookbook_id: cookbook)}
+  end
+
+  def handle_event("navigate_create_cookbook", _, socket) do
+    {:noreply, push_navigate(socket, to: ~p"/cookbooks/new")}
   end
 
   def handle_event(
