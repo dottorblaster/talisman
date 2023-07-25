@@ -52,7 +52,9 @@ defmodule TalismanWeb.NewRecipeLive do
         <div>
           <select name="cookbook" id="cookbook" phx-change="update_cookbook_id">
             <%= for cookbook <- assigns.cookbooks do %>
-              <option value={cookbook.uuid}><%= cookbook.name %></option>
+              <option value={cookbook.uuid} selected={selected_attr(cookbook.uuid, @cookbook_id)}>
+                <%= cookbook.name %>
+              </option>
             <% end %>
           </select>
         </div>
@@ -153,4 +155,9 @@ defmodule TalismanWeb.NewRecipeLive do
 
     {:noreply, socket}
   end
+
+  defp selected_attr(attr, attr),
+    do: true
+
+  defp selected_attr(_, _), do: false
 end
