@@ -81,7 +81,7 @@ defmodule TalismanWeb.Router do
     live "/cookbooks", CookbooksLive
     live "/cookbook/:cookbook_id", CookbookLive
     live "/recipes/new", NewRecipeLive
-    live "/recipe/:recipe_id", CookbooksLive
+    live "/recipe/:recipe_id", RecipeLive
     live "/cookbooks/new", NewCookbookLive
   end
 
