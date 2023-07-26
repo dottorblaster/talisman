@@ -79,8 +79,10 @@ defmodule TalismanWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
     live "/cookbooks", CookbooksLive
-    live "/cookbooks/new", NewCookbookLive
+    live "/cookbook/:cookbook_id", CookbookLive
     live "/recipes/new", NewRecipeLive
+    live "/recipe/:recipe_id", RecipeLive
+    live "/cookbooks/new", NewCookbookLive
   end
 
   scope "/", TalismanWeb do
