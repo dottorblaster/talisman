@@ -1,7 +1,6 @@
 defmodule TalismanWeb.RecipeLive do
   use TalismanWeb, :live_view
 
-  alias Earmark.Options
   alias Talisman.Cookbooks
 
   on_mount TalismanWeb.UserLiveAuth
