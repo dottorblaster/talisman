@@ -15,7 +15,7 @@ defmodule TalismanWeb.CookbookLive do
   def render(assigns) do
     ~H"""
     <div>
-      <h1 class="mb-5"><%= @cookbook.name %></h1>
+      <h1 class="mx-10 my-5 font-bold text-3xl"><%= @cookbook.name %></h1>
 
       <div class="">
         <%= for recipe <- @cookbook.recipes do %>

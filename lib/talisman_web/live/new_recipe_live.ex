@@ -14,11 +14,12 @@ defmodule TalismanWeb.NewRecipeLive do
   def mount(_params, _session, socket) do
     user_id = socket.assigns.current_user.id
     cookbooks = Cookbooks.get_cookbooks_by_author_uuid(user_id)
+    first_cookbook_id = get_first_cookbook_id(cookbooks)
 
     {:ok,
      socket
      |> assign(cookbooks: cookbooks)
-     |> assign(cookbook_id: "")
+     |> assign(cookbook_id: first_cookbook_id)
      |> assign(name: "")
      |> assign(ingredients: [])
      |> assign(recipe: "")}
@@ -160,4 +161,7 @@ defmodule TalismanWeb.NewRecipeLive do
     do: true
 
   defp selected_attr(_, _), do: false
+
+  defp get_first_cookbook_id([]), do: nil
+  defp get_first_cookbook_id(cookbooks), do: cookbooks |> List.first() |> Map.get(:uuid)
 end
