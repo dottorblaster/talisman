@@ -16,6 +16,6 @@ defmodule TalismanWeb.Components.ButtonTest do
              end,
              %{content: content}
            ) ==
-             "<button class=\"inline-block w-full rounded-lg bg-orange-400 px-5 py-3 font-medium text-white sm:w-auto\">\n  #{content}\n</button>"
+             "<button class=\"inline-block px-5 py-3 bg-orange-400 text-white font-medium rounded-lg w-full sm:w-auto\">\n  #{content}\n</button>"
   end
 end
