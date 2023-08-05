@@ -61,7 +61,8 @@ defmodule Talisman.MixProject do
       {:faker, "~> 0.17", only: [:dev, :test]},
       {:ex_machina, "~> 2.7.0", only: :test},
       {:tailwind, "~> 0.2.1", runtime: Mix.env() == :dev},
-      {:earmark, "~> 1.4"}
+      {:earmark, "~> 1.4"},
+      {:tails, "~> 0.1.6"}
     ]
   end
 
