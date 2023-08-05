@@ -18,6 +18,24 @@ defmodule TalismanWeb.Components.InputTest do
              end,
              %{name: name, value: value}
            ) ==
-             "<input class=\"rounded-lg border-gray-200 p-3 text-sm\" name=\"#{name}\" value=\"#{value}\">"
+             "<input class=\"p-3 border-gray-200 rounded-lg text-sm\" name=\"#{name}\" value=\"#{value}\">"
+  end
+
+  test "merges classes" do
+    name = Faker.StarWars.character()
+    value = Faker.StarWars.character()
+    class = Faker.Food.sushi() |> String.replace(" ", "") |> String.downcase()
+
+    html =
+      render_component(
+        fn assigns ->
+          ~H"""
+          <Input.input class={@class} name={@name} value={@value} />
+          """
+        end,
+        %{name: name, value: value, class: class}
+      )
+
+    assert html =~ class
   end
 end
