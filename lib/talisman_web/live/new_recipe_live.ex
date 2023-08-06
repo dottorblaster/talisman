@@ -41,6 +41,7 @@ defmodule TalismanWeb.NewRecipeLive do
         <div>
           <label class="sr-only" for="name">Name</label>
           <.input
+            class="w-full"
             type="text"
             name="name"
             placeholder="Name"
