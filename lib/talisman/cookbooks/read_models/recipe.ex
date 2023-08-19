@@ -4,6 +4,7 @@ defmodule Talisman.Cookbooks.ReadModels.Recipe do
   """
   use Ecto.Schema
 
+  import Ecto.Changeset
   import Ecto.Query
 
   alias Talisman.Cookbooks.ReadModels.Recipe
@@ -23,6 +24,10 @@ defmodule Talisman.Cookbooks.ReadModels.Recipe do
     field :category, :string
 
     timestamps()
+  end
+
+  def changeset(recipe, attrs) do
+    cast(recipe, attrs, __MODULE__.__schema__(:fields))
   end
 
   def by_cookbook_uuid(cookbook_uuid) do
