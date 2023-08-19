@@ -6,7 +6,7 @@ defmodule Talisman.Cookbooks do
   import Ecto.Query, warn: false
   alias Talisman.Commanded
 
-  alias Talisman.Cookbooks.Commands.{AddRecipe, CreateCookbook, LikeRecipe}
+  alias Talisman.Cookbooks.Commands.{AddRecipe, CreateCookbook, EditRecipe, LikeRecipe}
   alias Talisman.Cookbooks.ReadModels.{Cookbook, Recipe}
 
   alias Talisman.Repo
@@ -60,4 +60,21 @@ defmodule Talisman.Cookbooks do
 
   def like_recipe(attrs \\ %{}),
     do: attrs |> LikeRecipe.new!() |> Commanded.dispatch(consistency: :strong)
+
+  def edit_recipe(user_uuid, attrs \\ %{}) do
+    cookbook_uuid = Map.get(attrs, :cookbook_uuid)
+
+    user_owns_cookbook =
+      user_uuid
+      |> get_cookbooks_by_author_uuid()
+      |> Enum.any?(fn %{uuid: uuid, author_uuid: author_uuid} ->
+        author_uuid == user_uuid and uuid == cookbook_uuid
+      end)
+
+    if user_owns_cookbook do
+      attrs |> EditRecipe.new!() |> Commanded.dispatch(consistency: :strong)
+    else
+      :error
+    end
+  end
 end
