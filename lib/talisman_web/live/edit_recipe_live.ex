@@ -17,6 +17,8 @@ defmodule TalismanWeb.EditRecipeLive do
 
     {:ok,
      socket
+     |> assign(cookbook_uuid: recipe.cookbook_uuid)
+     |> assign(recipe_uuid: recipe_id)
      |> assign(name: recipe.name)
      |> assign(ingredients: recipe.ingredients)
      |> assign(recipe: recipe.recipe)}
@@ -111,7 +113,8 @@ defmodule TalismanWeb.EditRecipeLive do
         _,
         %{
           assigns: %{
-            cookbook_id: cookbook_id,
+            cookbook_uuid: cookbook_uuid,
+            recipe_uuid: recipe_uuid,
             recipe: recipe,
             ingredients: ingredients,
             name: name,
@@ -121,8 +124,8 @@ defmodule TalismanWeb.EditRecipeLive do
       ) do
     :ok =
       Cookbooks.edit_recipe(user_id, %{
-        cookbook_uuid: cookbook_id,
-        recipe_uuid: user_id,
+        cookbook_uuid: cookbook_uuid,
+        recipe_uuid: recipe_uuid,
         name: name,
         recipe: recipe,
         ingredients: ingredients,
