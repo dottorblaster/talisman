@@ -9,7 +9,7 @@ defmodule Talisman.Cookbooks.Projectors.Cookbook do
     repo: Talisman.Repo,
     consistency: :strong
 
-  alias Talisman.Cookbooks.Events.{CookbookCreated, RecipeAdded, RecipeLiked}
+  alias Talisman.Cookbooks.Events.{CookbookCreated, RecipeAdded, RecipeEdited, RecipeLiked}
   alias Talisman.Cookbooks.ReadModels.{Cookbook, Recipe}
 
   project(
@@ -66,6 +66,29 @@ defmodule Talisman.Cookbooks.Projectors.Cookbook do
           push: [liked_by: like_author]
         ]
       )
+    end
+  )
+
+  project(
+    %RecipeEdited{
+      recipe_uuid: recipe_uuid,
+      name: new_name,
+      recipe: new_recipe,
+      ingredients: new_ingredients,
+      category: new_category
+    },
+    fn multi ->
+      changeset =
+        Recipe
+        |> Talisman.Repo.get!(recipe_uuid)
+        |> Recipe.changeset(%{
+          name: new_name,
+          recipe: new_recipe,
+          ingredients: new_ingredients,
+          category: new_category
+        })
+
+      Ecto.Multi.update(multi, :recipe, changeset)
     end
   )
 end
