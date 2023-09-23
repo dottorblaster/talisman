@@ -48,10 +48,9 @@ defmodule Talisman.Cookbooks do
   end
 
   def add_recipe(attrs \\ %{}) do
-    attrs
-    |> Map.put(:recipe_uuid, UUID.uuid4())
-    |> AddRecipe.new!()
-    |> Commanded.dispatch(consistency: :strong)
+    with {:ok, command} <- attrs |> Map.put(:recipe_uuid, UUID.uuid4()) |> AddRecipe.new() do
+      Commanded.dispatch(command, consistency: :strong)
+    end
   end
 
   def get_cookbooks_by_author_uuid(uuid), do: uuid |> Cookbook.by_author_uuid() |> Repo.all()
