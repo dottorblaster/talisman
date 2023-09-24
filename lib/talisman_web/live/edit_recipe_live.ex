@@ -1,4 +1,5 @@
 defmodule TalismanWeb.EditRecipeLive do
+  require Logger
   use TalismanWeb, :live_view
 
   alias Phoenix.HTML.Form
@@ -7,6 +8,7 @@ defmodule TalismanWeb.EditRecipeLive do
 
   import TalismanWeb.Components.Button
   import TalismanWeb.Components.Container
+  import TalismanWeb.Components.FormError
   import TalismanWeb.Components.Input
 
   on_mount TalismanWeb.UserLiveAuth
@@ -21,7 +23,8 @@ defmodule TalismanWeb.EditRecipeLive do
      |> assign(recipe_uuid: recipe_id)
      |> assign(name: recipe.name)
      |> assign(ingredients: recipe.ingredients)
-     |> assign(recipe: recipe.recipe)}
+     |> assign(recipe: recipe.recipe)
+     |> assign(errors: %{})}
   end
 
   def render(assigns) do
@@ -39,6 +42,7 @@ defmodule TalismanWeb.EditRecipeLive do
             phx-change="update_name"
             value={Form.normalize_value("text", assigns.name)}
           />
+          <.form_error class="mt-1" errors={@errors} key={:name} />
         </div>
 
         <div>
@@ -56,6 +60,7 @@ defmodule TalismanWeb.EditRecipeLive do
           <p class="mt-3 text-xs text-gray-400 dark:text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
+          <.form_error errors={@errors} key={:recipe} />
         </div>
 
         <div class="mt-4">
@@ -122,7 +127,7 @@ defmodule TalismanWeb.EditRecipeLive do
           }
         } = socket
       ) do
-    :ok =
+    result =
       Cookbooks.edit_recipe(user_id, %{
         cookbook_uuid: cookbook_uuid,
         recipe_uuid: recipe_uuid,
@@ -132,6 +137,19 @@ defmodule TalismanWeb.EditRecipeLive do
         category: ""
       })
 
-    {:noreply, socket}
+    new_socket =
+      case result do
+        {:error, :cookbook_pemission_denied} ->
+          Logger.error("Trying to edit recipe but permission to the cookbook was denied.")
+          socket
+
+        {:error, errors} ->
+          assign(socket, errors: errors)
+
+        :ok ->
+          socket
+      end
+
+    {:noreply, new_socket}
   end
 end
