@@ -71,9 +71,11 @@ defmodule Talisman.Cookbooks do
       end)
 
     if user_owns_cookbook do
-      attrs |> EditRecipe.new!() |> Commanded.dispatch(consistency: :strong)
+      with {:ok, command} <- attrs |> EditRecipe.new() do
+        Commanded.dispatch(command, consistency: :strong)
+      end
     else
-      :error
+      {:error, :cookbook_permission_denied}
     end
   end
 end
