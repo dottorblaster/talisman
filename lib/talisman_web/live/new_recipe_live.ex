@@ -1,4 +1,5 @@
 defmodule TalismanWeb.NewRecipeLive do
+  require Logger
   use TalismanWeb, :live_view
 
   alias Phoenix.HTML.Form
@@ -7,6 +8,7 @@ defmodule TalismanWeb.NewRecipeLive do
 
   import TalismanWeb.Components.Button
   import TalismanWeb.Components.Container
+  import TalismanWeb.Components.FormError
   import TalismanWeb.Components.Input
 
   on_mount TalismanWeb.UserLiveAuth
@@ -22,7 +24,8 @@ defmodule TalismanWeb.NewRecipeLive do
      |> assign(cookbook_id: first_cookbook_id)
      |> assign(name: "")
      |> assign(ingredients: [])
-     |> assign(recipe: "")}
+     |> assign(recipe: "")
+     |> assign(errors: %{})}
   end
 
   def render(%{cookbooks: []} = assigns) do
@@ -49,6 +52,7 @@ defmodule TalismanWeb.NewRecipeLive do
             phx-change="update_name"
             value={Form.normalize_value("text", assigns.name)}
           />
+          <.form_error class="mt-1" errors={@errors} key={:name} />
         </div>
 
         <div>
@@ -76,6 +80,7 @@ defmodule TalismanWeb.NewRecipeLive do
           <p class="mt-3 text-xs text-gray-400 dark:text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
+          <.form_error errors={@errors} key={:recipe} />
         </div>
 
         <div class="mt-4">
@@ -145,7 +150,7 @@ defmodule TalismanWeb.NewRecipeLive do
           }
         } = socket
       ) do
-    :ok =
+    result =
       Cookbooks.add_recipe(%{
         cookbook_uuid: cookbook_id,
         author_uuid: user_id,
@@ -155,7 +160,17 @@ defmodule TalismanWeb.NewRecipeLive do
         category: ""
       })
 
-    {:noreply, socket}
+    new_socket =
+      case result do
+        :ok ->
+          socket
+
+        {:error, errors} ->
+          Logger.error("Error saving new recipe: #{inspect(errors)}")
+          assign(socket, errors: errors)
+      end
+
+    {:noreply, new_socket}
   end
 
   defp selected_attr(attr, attr),
