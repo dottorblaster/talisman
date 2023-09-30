@@ -18,6 +18,7 @@ defmodule TalismanWeb.Components.Input do
           "border-gray-200",
           "p-3",
           "text-sm",
+          "shadow-md",
           @class
         ])
       }
