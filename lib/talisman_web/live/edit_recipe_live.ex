@@ -75,7 +75,7 @@ defmodule TalismanWeb.EditRecipeLive do
         </div>
 
         <div class="mt-4">
-          <.button phx-click="add_ingredient" type="button">Add ingredient</.button>
+          <.button phx-click="add_ingredient" type="button">+ Add ingredient</.button>
         </div>
 
         <div class="mt-4">

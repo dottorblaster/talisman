@@ -19,10 +19,18 @@ defmodule TalismanWeb.Components.Button do
           "rounded-lg",
           "bg-orange-400",
           "px-5",
-          "py-3",
-          "font-medium",
+          "py-2",
+          "font-semibold",
           "text-white",
           "sm:w-auto",
+          "transition",
+          "ease-in",
+          "shadow-md",
+          "focus:ring-2",
+          "focus:ring-offset-2",
+          "hover:bg-orange-500",
+          "border-b-4",
+          "border-orange-500",
           @class
         ])
       }
