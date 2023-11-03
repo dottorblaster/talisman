@@ -5,7 +5,13 @@ defmodule Talisman.Release do
   """
   @app :talisman
 
-  alias EventStore.Tasks.Init
+  alias EventStore.Tasks.{Init, Migrate}
+
+  def init do
+    migrate()
+    init_event_store()
+    migrate_event_store()
+  end
 
   def migrate do
     load_app()
@@ -24,6 +30,17 @@ defmodule Talisman.Release do
     config = Talisman.EventStore.config()
 
     :ok = Init.exec(config, [])
+  end
+
+  def migrate_event_store do
+    {:ok, _} = Application.ensure_all_started(:postgrex)
+    {:ok, _} = Application.ensure_all_started(:ssl)
+
+    load_app()
+
+    config = Talisman.EventStore.config()
+
+    :ok = Migrate.exec(config, [])
   end
 
   def rollback(repo, version) do
