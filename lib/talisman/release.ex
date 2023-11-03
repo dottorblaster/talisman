@@ -5,12 +5,25 @@ defmodule Talisman.Release do
   """
   @app :talisman
 
+  alias EventStore.Tasks.Init
+
   def migrate do
     load_app()
 
     for repo <- repos() do
       {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :up, all: true))
     end
+  end
+
+  def init_event_store do
+    {:ok, _} = Application.ensure_all_started(:postgrex)
+    {:ok, _} = Application.ensure_all_started(:ssl)
+
+    load_app()
+
+    config = Talisman.EventStore.config()
+
+    :ok = Init.exec(config, [])
   end
 
   def rollback(repo, version) do
