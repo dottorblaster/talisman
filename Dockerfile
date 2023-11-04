@@ -89,4 +89,6 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/talisman ./
 
 USER nobody
 
-ENTRYPOINT ["/app/bin/server"]
+EXPOSE 4000
+
+ENTRYPOINT ["/app/bin/talisman"]
