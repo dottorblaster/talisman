@@ -1,15 +1,15 @@
-<div class="flex sm:flex-col xl:flex-row lg:min-h-full">
+<div class="flex xs:flex-col xl:flex-row lg:min-h-full">
   <div class="w-full xl:w-2/4 m-10 p-20 border border-grey-200 rounded-md shadow-lg">
     <h1 class="text-3xl font-bold">Welcome to Talisman!</h1>
     <p class="text-lg">The place where you can share your recipe and keep them safe.</p>
   </div>
 
   <div class="flex w-full xl:w-2/4 min-h-full flex-col justify-center m-10 p-20 shadow-lg border border-grey-200 rounded-md">
-    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <div class="xs:mx-auto xs:w-full xs:max-w-sm">
       <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
     </div>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div class="mt-10 xs:mx-auto xs:w-full xs:max-w-sm">
       <.form :let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user} class="space-y-6">
         <%= if @error_message do %>
           <div class="alert alert-danger">
@@ -20,7 +20,7 @@
         <div>
           <%= label f, :email, class: "block text-base font-medium leading-6 text-gray-900" %>
           <div class="mt-2">
-            <%= email_input f, :email, required: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-400 sm:text-sm sm:leading-6" %>
+            <%= email_input f, :email, required: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-400 xs:text-sm xs:leading-6" %>
           </div>
         </div>
 
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="mt-2">
-            <%= password_input f, :password, required: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-400 sm:text-sm sm:leading-6" %>
+            <%= password_input f, :password, required: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-400 xs:text-sm xs:leading-6" %>
           </div>
         </div>
 
