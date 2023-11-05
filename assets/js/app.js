@@ -42,3 +42,9 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+const menuButton = document.querySelector('#menu-collapse')
+
+const menuDropdownId = menuButton.attributes.getNamedItem('aria-controls').textContent
+const dropdown = document.querySelector(`#${menuDropdownId}`)
+
+menuButton.onclick = () => dropdown.classList.toggle('hidden') 
