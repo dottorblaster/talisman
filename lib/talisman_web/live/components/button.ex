@@ -15,14 +15,12 @@ defmodule TalismanWeb.Components.Button do
       class={
         Tails.classes([
           "inline-block",
-          "w-full",
           "rounded-lg",
           "bg-orange-400",
           "px-5",
           "py-2",
           "font-semibold",
           "text-white",
-          "sm:w-auto",
           "transition",
           "ease-in",
           "shadow-md",

@@ -14,12 +14,13 @@ defmodule TalismanWeb.NewCookbookLive do
   def render(assigns) do
     ~H"""
     <.container>
+      <h1 class="text-xl font-bold mb-4">Create a new cookbook</h1>
       <form class="">
         <.input
           type="text"
           name="cookbook_name"
           phx-change="update_cookbook_name"
-          placeholder="Kekw"
+          placeholder="Cookbook name"
           value={assigns.cookbook_name}
         />
         <.button type="button" phx-click="new_cookbook_submit">Submit</.button>
