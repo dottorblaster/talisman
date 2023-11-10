@@ -14,9 +14,9 @@ defmodule TalismanWeb.CookbooksLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mt-6 px-24">
+    <div class="mt-6 px-20">
       <%= for cookbook <- assigns.cookbooks do %>
-        <div>
+        <div class="p-6 shadow-md text-lg rounded font-bold">
           <a href={"/cookbook/#{cookbook.uuid}"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,9 @@ defmodule TalismanWeb.CookbooksLive do
               />
             </svg>
 
-            <%= cookbook.name %>
+            <span class="pl-4">
+              <%= cookbook.name %>
+            </span>
           </a>
         </div>
       <% end %>
