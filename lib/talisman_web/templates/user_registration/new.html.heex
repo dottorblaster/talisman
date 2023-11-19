@@ -1,32 +1,55 @@
 <h1>Register</h1>
 
-<.form :let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+<div class="mt-10 xs:mx-auto xs:w-full xs:max-w-sm">
+  <.form :let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
+    <div>
+      <%= label(f, :email, class: "block text-base font-medium leading-6 text-gray-900") %>
+      <div class="mt-2">
+        <%= email_input(f, :email,
+          required: true,
+          class:
+            "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-400 xs:text-sm xs:leading-6"
+        ) %>
+        <%= error_tag(f, :email) %>
+      </div>
     </div>
-  <% end %>
 
-  <%= label(f, :email) %>
-  <%= email_input(f, :email, required: true) %>
-  <%= error_tag(f, :email) %>
+    <div>
+      <%= label(f, :username, class: "block text-base font-medium leading-6 text-gray-900") %>
+      <div class="mt-2">
+        <%= email_input(f, :username,
+          required: true,
+          class:
+            "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-400 xs:text-sm xs:leading-6"
+        ) %>
+        <%= error_tag(f, :username) %>
+      </div>
+    </div>
 
-  <%= label(f, :username) %>
-  <%= text_input(f, :username, required: true) %>
-  <%= error_tag(f, :username) %>
+    <div>
+      <%= label(f, :password, class: "block text-base font-medium leading-6 text-gray-900") %>
+      <div class="mt-2">
+        <%= password_input(f, :password,
+          required: true,
+          class:
+            "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-400 xs:text-sm xs:leading-6"
+        ) %>
+        <%= error_tag(f, :password) %>
+      </div>
+    </div>
 
-  <%= label(f, :password) %>
-  <%= password_input(f, :password, required: true) %>
-  <%= error_tag(f, :password) %>
+    <div>
+      <%= submit("Register",
+        class:
+          "flex w-full mt-6 justify-center rounded-md bg-orange-400 px-3 py-1.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 border-b-4 border-orange-500"
+      ) %>
+    </div>
+  </.form>
 
-  <div>
-    <%= submit("Register") %>
-  </div>
-</.form>
-
-<p>
-  <%= link("Log in", to: Routes.user_session_path(@conn, :new)) %> | <%= link(
-    "Forgot your password?",
-    to: Routes.user_reset_password_path(@conn, :new)
-  ) %>
-</p>
+  <p class="mt-10 text-center text-sm text-gray-500">
+    Want to log in instead? <%= link("Sign in!",
+      to: Routes.user_session_path(@conn, :new),
+      class: "font-semibold leading-6 text-orange-400 hover:text-orange-300"
+    ) %>
+  </p>
+</div>
