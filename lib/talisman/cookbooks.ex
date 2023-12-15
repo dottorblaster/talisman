@@ -6,7 +6,14 @@ defmodule Talisman.Cookbooks do
   import Ecto.Query, warn: false
   alias Talisman.Commanded
 
-  alias Talisman.Cookbooks.Commands.{AddRecipe, CreateCookbook, EditRecipe, LikeRecipe}
+  alias Talisman.Cookbooks.Commands.{
+    AddRecipe,
+    CreateCookbook,
+    DeleteRecipe,
+    EditRecipe,
+    LikeRecipe
+  }
+
   alias Talisman.Cookbooks.ReadModels.{Cookbook, Recipe}
 
   alias Talisman.Repo
@@ -72,6 +79,25 @@ defmodule Talisman.Cookbooks do
 
     if user_owns_cookbook do
       with {:ok, command} <- attrs |> EditRecipe.new() do
+        Commanded.dispatch(command, consistency: :strong)
+      end
+    else
+      {:error, :cookbook_permission_denied}
+    end
+  end
+
+  def delete_recipe(user_uuid, attrs \\ %{}) do
+    cookbook_uuid = Map.get(attrs, :cookbook_uuid)
+
+    user_owns_cookbook =
+      user_uuid
+      |> get_cookbooks_by_author_uuid()
+      |> Enum.any?(fn %{uuid: uuid, author_uuid: author_uuid} ->
+        author_uuid == user_uuid and uuid == cookbook_uuid
+      end)
+
+    if user_owns_cookbook do
+      with {:ok, command} <- attrs |> DeleteRecipe.new() do
         Commanded.dispatch(command, consistency: :strong)
       end
     else
