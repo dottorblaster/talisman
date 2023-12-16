@@ -55,4 +55,23 @@ defmodule TalismanWeb.Components.Button do
       "border-b-4",
       "border-stone-400"
     ]
+
+  defp get_button_classes(_),
+    do: [
+      "inline-block",
+      "rounded-lg",
+      "bg-orange-400",
+      "px-5",
+      "py-2",
+      "font-semibold",
+      "text-white",
+      "transition",
+      "ease-in",
+      "shadow-md",
+      "focus:ring-2",
+      "focus:ring-offset-2",
+      "hover:bg-orange-500",
+      "border-b-4",
+      "border-orange-500"
+    ]
 end
