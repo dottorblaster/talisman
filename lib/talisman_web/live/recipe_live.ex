@@ -4,7 +4,7 @@ defmodule TalismanWeb.RecipeLive do
 
   alias Talisman.Cookbooks
 
-  import TalismanWeb.Components.Button
+  import TalismanWeb.Components.{Button, Modal}
 
   on_mount TalismanWeb.UserLiveAuth
 
@@ -12,7 +12,7 @@ defmodule TalismanWeb.RecipeLive do
     recipe_id = Map.get(params, "recipe_id")
     recipe = Cookbooks.get_recipe!(recipe_id)
 
-    {:ok, assign(socket, recipe: recipe, recipe_id: recipe_id)}
+    {:ok, assign(socket, recipe: recipe, recipe_id: recipe_id, deletion_modal_visible: false)}
   end
 
   def render(assigns) do
@@ -25,8 +25,15 @@ defmodule TalismanWeb.RecipeLive do
       </div>
       <div class="mx-10 mt-10">
         <.button phx-click="recipe_edit">Edit</.button>
-        <.button phx-click="recipe_delete">Delete</.button>
+        <.button phx-click="show_deletion_modal">Delete</.button>
       </div>
+      <.modal title="Delete recipe" type="warning" open={@deletion_modal_visible}>
+        Are you sure you want to delete this recipe?
+        <:footer>
+          <.button class="mx-1" phx-click="recipe_delete">Delete</.button>
+          <.button type="secondary" phx-click="hide_deletion_modal">Cancel</.button>
+        </:footer>
+      </.modal>
     </div>
     """
   end
@@ -41,6 +48,12 @@ defmodule TalismanWeb.RecipeLive do
         } = socket
       ),
       do: {:noreply, push_navigate(socket, to: ~p"/recipe/#{recipe_id}/edit")}
+
+  def handle_event("show_deletion_modal", _payload, socket),
+    do: {:noreply, assign(socket, deletion_modal_visible: true)}
+
+  def handle_event("hide_deletion_modal", _payload, socket),
+    do: {:noreply, assign(socket, deletion_modal_visible: false)}
 
   def handle_event(
         "recipe_delete",
