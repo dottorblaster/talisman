@@ -6,13 +6,13 @@ defmodule TalismanWeb.Components.Button do
   use Phoenix.Component
 
   attr :class, :string, default: nil
-  attr :type, :string, default: "primary"
+  attr :intent, :string, default: "primary"
   attr :rest, :global
   slot :inner_block
 
   def button(assigns) do
     ~H"""
-    <button class={Tails.classes(get_button_classes(@type) ++ [@class])} {@rest}>
+    <button class={Tails.classes(get_button_classes(@intent) ++ [@class])} {@rest}>
       <%= render_slot(@inner_block) %>
     </button>
     """

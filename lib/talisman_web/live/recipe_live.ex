@@ -31,7 +31,7 @@ defmodule TalismanWeb.RecipeLive do
         Are you sure you want to delete this recipe?
         <:footer>
           <.button class="mx-1" phx-click="recipe_delete">Delete</.button>
-          <.button type="secondary" phx-click="hide_deletion_modal">Cancel</.button>
+          <.button intent="secondary" phx-click="hide_deletion_modal">Cancel</.button>
         </:footer>
       </.modal>
     </div>
