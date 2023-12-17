@@ -11,7 +11,7 @@ defmodule TalismanWeb.CookbooksLiveTest do
     %{user: user, conn: conn}
   end
 
-  describe "RecipeLive view" do
+  describe "CookbooksLive view" do
     test "displays a recipe", %{conn: conn, user: user} do
       %{name: cookbook_name} =
         new_cookbook = %{author_uuid: user.id, name: Faker.Pokemon.name(), recipes: []}
