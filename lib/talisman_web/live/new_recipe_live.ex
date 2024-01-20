@@ -163,7 +163,7 @@ defmodule TalismanWeb.NewRecipeLive do
     new_socket =
       case result do
         :ok ->
-          socket
+          push_navigate(socket, to: ~p"/cookbook/#{cookbook_id}")
 
         {:error, errors} ->
           Logger.error("Error saving new recipe: #{inspect(errors)}")
