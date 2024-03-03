@@ -19,7 +19,7 @@ defmodule TalismanWeb.CookbookLive do
 
       <div class="">
         <%= for recipe <- @cookbook.recipes do %>
-          <div class="w-96 rounded overflow-hidden shadow-lg mx-6 inline-block">
+          <div class="xs:w-80 sm:w-96 rounded overflow-hidden shadow-lg mx-6 inline-block">
             <div class="px-6 py-4">
               <div class="font-bold text-xl mb-2">
                 <a href={"/recipe/#{recipe.uuid}"}><%= recipe.name %></a>
