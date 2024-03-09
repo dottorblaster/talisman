@@ -16,7 +16,7 @@ defmodule TalismanWeb.CookbooksLive do
     ~H"""
     <div class="mt-6 px-20">
       <%= for cookbook <- assigns.cookbooks do %>
-        <div class="p-6 shadow-md text-lg rounded font-bold">
+        <div class="p-6 shadow-lg text-lg rounded font-bold border border-gray-300 border-b-2">
           <a href={"/cookbook/#{cookbook.uuid}"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
