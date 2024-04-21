@@ -147,7 +147,7 @@ defmodule TalismanWeb.EditRecipeLive do
           assign(socket, errors: errors)
 
         :ok ->
-          socket
+          push_navigate(socket, to: ~p"/recipe/#{recipe_uuid}")
       end
 
     {:noreply, new_socket}
