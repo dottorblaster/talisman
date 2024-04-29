@@ -18,7 +18,7 @@ defmodule TalismanWeb.Components.InputTest do
              end,
              %{name: name, value: value}
            ) ==
-             "<input class=\"p-3 border-gray-200 shadow-md rounded-lg text-sm\" name=\"#{name}\" value=\"#{value}\">"
+             "<input class=\"p-3 rounded-lg border-gray-200 shadow-md text-sm\" name=\"#{name}\" value=\"#{value}\">"
   end
 
   test "merges classes" do
