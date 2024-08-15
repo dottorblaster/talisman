@@ -114,6 +114,5 @@ defmodule TalismanWeb.Components.Modal do
 
   defp get_modal_icon(_, assigns),
     do: ~H"""
-
     """
 end

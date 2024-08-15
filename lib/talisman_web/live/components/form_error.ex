@@ -29,7 +29,6 @@ defmodule TalismanWeb.Components.FormError do
       """
     else
       ~H"""
-
       """
     end
   end
