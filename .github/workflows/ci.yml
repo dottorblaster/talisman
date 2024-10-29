@@ -26,13 +26,19 @@ jobs:
         elixir-version: ${{ env.ELIXIR_VERSION }}
         otp-version: ${{ env.OTP_VERSION }}
     - name: Restore dependencies cache
+      id: mix-cache
       uses: actions/cache@v4
       with:
         path: deps
         key: ${{ runner.os }}-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-${{ hashFiles('mix.lock') }}
-        restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
-      run: mix deps.get
+      if: steps.mix-cache.outputs.cache-hit != 'true'
+      run: |
+        mkdir -p priv/plts
+        mix local.rebar --force
+        mix local.hex --force
+        mix deps.get
+        mix deps.compile --warnings-as-errors
  
     - name: Compile
       run: mix compile --warnings-as-errors
@@ -81,8 +87,16 @@ jobs:
             _build/test
             priv/plts
           key: ${{ runner.os }}-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-${{ hashFiles('mix.lock') }}
+
       - name: Install dependencies
-        run: mix deps.get
+        if: steps.mix-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p priv/plts
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
+          mix deps.compile --warnings-as-errors
+
       - name: Reset the database
         run: mix do ecto.reset, event_store.drop, event_store.create, event_store.init
       - name: Run tests
