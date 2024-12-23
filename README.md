@@ -1,5 +1,9 @@
 # Talisman
 
+Welcome to Talisman, a powerful web application designed to help you manage your recipes and cookbooks effortlessly. 
+
+## Development
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
