@@ -24,7 +24,7 @@ defmodule TalismanWeb.Components.FormError do
         }
         {@rest}
       >
-        <%= Map.get(@errors, @key, "") %>
+        {Map.get(@errors, @key, "")}
       </p>
       """
     else

@@ -59,7 +59,7 @@ defmodule TalismanWeb.NewRecipeLive do
           <select name="cookbook" id="cookbook" phx-change="update_cookbook_id">
             <%= for cookbook <- assigns.cookbooks do %>
               <option value={cookbook.uuid} selected={selected_attr(cookbook.uuid, @cookbook_id)}>
-                <%= cookbook.name %>
+                {cookbook.name}
               </option>
             <% end %>
           </select>
