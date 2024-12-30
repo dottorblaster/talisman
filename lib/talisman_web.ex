@@ -24,7 +24,7 @@ defmodule TalismanWeb do
       use Phoenix.Controller, namespace: TalismanWeb
 
       import Plug.Conn
-      import TalismanWeb.Gettext
+      use Gettext, backend: TalismanWeb.Gettext
       alias TalismanWeb.Router.Helpers, as: Routes
 
       unquote(verified_routes())
@@ -84,7 +84,7 @@ defmodule TalismanWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import TalismanWeb.Gettext
+      use Gettext, backend: TalismanWeb.Gettext
     end
   end
 
@@ -102,7 +102,7 @@ defmodule TalismanWeb do
       import Phoenix.View
 
       import TalismanWeb.ErrorHelpers
-      import TalismanWeb.Gettext
+      use Gettext, backend: TalismanWeb.Gettext
       alias TalismanWeb.Router.Helpers, as: Routes
 
       unquote(verified_routes())
