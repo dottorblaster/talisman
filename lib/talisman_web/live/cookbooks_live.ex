@@ -34,7 +34,7 @@ defmodule TalismanWeb.CookbooksLive do
             </svg>
 
             <span class="pl-4">
-              <%= cookbook.name %>
+              {cookbook.name}
             </span>
           </a>
         </div>

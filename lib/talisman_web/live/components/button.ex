@@ -13,7 +13,7 @@ defmodule TalismanWeb.Components.Button do
   def button(assigns) do
     ~H"""
     <button class={Tails.classes(get_button_classes(@intent) ++ [@class])} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </button>
     """
   end

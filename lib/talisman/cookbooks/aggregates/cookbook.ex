@@ -40,7 +40,11 @@ defmodule Talisman.Cookbooks.Aggregates.Cookbook do
         name: name
       }),
       do:
-        CookbookCreated.new!(%{cookbook_uuid: cookbook_uuid, author_uuid: author_uuid, name: name})
+        CookbookCreated.new!(%{
+          cookbook_uuid: cookbook_uuid,
+          author_uuid: author_uuid,
+          name: name
+        })
 
   def execute(%Cookbook{uuid: uuid}, %AddRecipe{
         cookbook_uuid: uuid,

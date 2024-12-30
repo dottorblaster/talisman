@@ -15,23 +15,23 @@ defmodule TalismanWeb.CookbookLive do
   def render(assigns) do
     ~H"""
     <div>
-      <h1 class="mx-10 my-5 font-bold text-3xl"><%= @cookbook.name %></h1>
+      <h1 class="mx-10 my-5 font-bold text-3xl">{@cookbook.name}</h1>
 
       <div class="">
         <%= for recipe <- @cookbook.recipes do %>
           <div class="xs:w-80 sm:w-96 rounded overflow-hidden shadow-lg mx-6 inline-block border border-gray-300 border-b-2">
             <div class="px-6 py-4">
               <div class="font-bold text-xl mb-2">
-                <a href={"/recipe/#{recipe.uuid}"}><%= recipe.name %></a>
+                <a href={"/recipe/#{recipe.uuid}"}>{recipe.name}</a>
               </div>
               <p class="text-gray-700 text-base">
-                <%= render_preview(recipe.recipe) %>
+                {render_preview(recipe.recipe)}
               </p>
             </div>
             <div class="px-6 pt-4 pb-2">
               <%= for ingredient <- recipe.ingredients do %>
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  <%= ingredient %>
+                  {ingredient}
                 </span>
               <% end %>
             </div>

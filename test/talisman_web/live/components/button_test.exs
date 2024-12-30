@@ -11,7 +11,7 @@ defmodule TalismanWeb.Components.ButtonTest do
     assert render_component(
              fn assigns ->
                ~H"""
-               <Button.button><%= @content %></Button.button>
+               <Button.button>{@content}</Button.button>
                """
              end,
              %{content: content}
@@ -25,7 +25,7 @@ defmodule TalismanWeb.Components.ButtonTest do
     assert render_component(
              fn assigns ->
                ~H"""
-               <Button.button class="sample-class"><%= @content %></Button.button>
+               <Button.button class="sample-class">{@content}</Button.button>
                """
              end,
              %{content: content}

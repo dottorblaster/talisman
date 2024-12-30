@@ -19,17 +19,17 @@ defmodule TalismanWeb.RecipeLive do
     ~H"""
     <div>
       <div>
-        <h1 class="mx-10 my-5 font-bold text-3xl"><%= @recipe.name %></h1>
+        <h1 class="mx-10 my-5 font-bold text-3xl">{@recipe.name}</h1>
         <div class="mx-10 mb-10">
           <%= for ingredient <- @recipe.ingredients do %>
             <div>
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                <%= ingredient %>
+                {ingredient}
               </span>
             </div>
           <% end %>
         </div>
-        <div class="mx-10"><%= as_html(@recipe.recipe) %></div>
+        <div class="mx-10">{as_html(@recipe.recipe)}</div>
       </div>
       <div class="mx-10 mt-10">
         <.button phx-click="recipe_edit">Edit</.button>
