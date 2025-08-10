@@ -20,9 +20,11 @@ ARG MIX_ENV=prod
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
+
 # these are needed as erlang runtime's deps
-# RUN zypper -n in libsystemd0 libopenssl1_1
+RUN zypper -n in libsystemd0 libopenssl3
 WORKDIR /app
 COPY --from=elixir-build /build/_build/$MIX_ENV/rel/talisman .
 EXPOSE 4000
+
 ENTRYPOINT ["/app/bin/talisman"]
