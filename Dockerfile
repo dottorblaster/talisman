@@ -7,7 +7,9 @@ ENV MIX_ENV=${MIX_ENV}
 ENV MIX_HOME=/usr/bin
 ENV MIX_REBAR3=/usr/bin/rebar3
 ENV MIX_PATH=/usr/lib/elixir/lib/hex/ebin
+
 RUN zypper -n in make gcc git-core elixir elixir-hex erlang erlang-rebar3
+
 COPY . /build
 WORKDIR /build
 RUN mix deps.get
