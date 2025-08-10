@@ -21,7 +21,7 @@ defmodule TalismanWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: TalismanWeb
+      use Phoenix.Controller, formats: [html: "View", json: "View"]
 
       import Plug.Conn
       use Gettext, backend: TalismanWeb.Gettext
