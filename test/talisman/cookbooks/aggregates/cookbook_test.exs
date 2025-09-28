@@ -97,6 +97,47 @@ defmodule Talisman.Cookbooks.Aggregates.CookbookTest do
         }
       ])
     end
+
+    test "should succeed with a very long recipe (255+ chars)" do
+      %CreateCookbook{
+        author_uuid: author_uuid,
+        cookbook_uuid: cookbook_uuid
+      } = create_cookbook_command = build(:create_cookbook_command)
+
+      %AddRecipe{
+        recipe_uuid: recipe_uuid
+      } =
+        add_recipe_command =
+        build(:add_recipe_command, author_uuid: author_uuid, cookbook_uuid: cookbook_uuid)
+
+      %EditRecipe{
+        recipe: new_recipe,
+        name: new_name,
+        ingredients: new_ingredients,
+        category: new_category
+      } =
+        edit_recipe_command =
+        build(:edit_recipe_command,
+          cookbook_uuid: cookbook_uuid,
+          recipe_uuid: recipe_uuid,
+          recipe:
+            "Marinare il pollo almeno 20 minuti nella marinatura. Cuocerlo in padella con olio qb. Toglierlo e nella stessa padella cuocere funghi, aglio, zenzero (aggiungere olio e/o acqua). Quando sono praticamente cotti, aggiungere la salsa e girare finché non si addensa. Rimettere il pollo per uno o due minuti. Servire",
+          ingredients: [
+            "Per la marinatura: 2 tbsp salsa di soia, 1 tbsp sake o vino,1 tbsp olio di sesamo, 1 tbsp amido di mais e 300 gr pollo. Per la salsa: 2 tbsp oyster sauce, 1 tbsp olio di sesamo,1 cucchiaino di zucchero, brodo 125 gr, 1 tbsp amido mais. Altro: funghi, zenzero, aglio"
+          ]
+        )
+
+      assert_events([create_cookbook_command, add_recipe_command, edit_recipe_command], [
+        %RecipeEdited{
+          recipe_uuid: recipe_uuid,
+          cookbook_uuid: cookbook_uuid,
+          name: new_name,
+          recipe: new_recipe,
+          ingredients: new_ingredients,
+          category: new_category
+        }
+      ])
+    end
   end
 
   describe "like recipe" do
