@@ -8,9 +8,9 @@ defmodule Talisman.Release do
   alias EventStore.Tasks.{Init, Migrate}
 
   def init do
-    migrate()
     init_event_store()
     migrate_event_store()
+    migrate()
   end
 
   def migrate do
