@@ -27,7 +27,7 @@ jobs:
         otp-version: ${{ env.OTP_VERSION }}
     - name: Restore dependencies cache
       id: mix-cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: deps
         key: ${{ runner.os }}-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-${{ hashFiles('mix.lock') }}
@@ -79,7 +79,7 @@ jobs:
           elixir-version: ${{ env.ELIXIR_VERSION }}
           otp-version: ${{ env.OTP_VERSION }}
       - name: Retrieve Cached Dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: mix-cache
         with:
           path: |
