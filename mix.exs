@@ -62,7 +62,7 @@ defmodule Talisman.MixProject do
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:faker, "~> 0.17", only: [:dev, :test]},
       {:ex_machina, "~> 2.8.0", only: :test},
-      {:tailwind, "~> 0.4.1", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.5.0", runtime: Mix.env() == :dev},
       {:earmark, "~> 1.4"},
       {:tails, "~> 0.1.6"},
       {:lazy_html, ">= 0.1.0", only: :test}
