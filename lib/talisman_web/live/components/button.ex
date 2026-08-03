@@ -7,7 +7,7 @@ defmodule TalismanWeb.Components.Button do
 
   attr :class, :string, default: nil
   attr :intent, :string, default: "primary"
-  attr :rest, :global
+  attr :rest, :global, include: ~w(type form name value disabled)
   slot :inner_block
 
   def button(assigns) do

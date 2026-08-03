@@ -6,7 +6,7 @@ defmodule TalismanWeb.Components.Input do
   use Phoenix.Component
 
   attr :class, :string, default: nil
-  attr :rest, :global, include: ~w(name value)
+  attr :rest, :global, include: ~w(name value type placeholder)
   slot :inner_block
 
   def input(assigns) do

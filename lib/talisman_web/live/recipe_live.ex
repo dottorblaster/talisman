@@ -73,8 +73,7 @@ defmodule TalismanWeb.RecipeLive do
                 </span>
                 <span class="text-[15px] leading-snug text-gray-400 line-through">{ingredient}</span>
               <% else %>
-                <span class="w-[22px] h-[22px] rounded-md border-2 border-orange-300 bg-white shrink-0">
-                </span>
+                <span class="w-[22px] h-[22px] rounded-md border-2 border-orange-300 bg-white shrink-0"></span>
                 <span class="text-[15px] leading-snug text-gray-700">{ingredient}</span>
               <% end %>
             </button>
